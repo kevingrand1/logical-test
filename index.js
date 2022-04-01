@@ -30,8 +30,9 @@ const LOGICAL_TEST_APP = (function () {
     const convertPositionToCoordinatesInDeck = (position) => {
         const coordinates = document.querySelector("[data-id='" + position +"']").getBoundingClientRect();
         const deckCoordinates = document.getElementById('deck').getBoundingClientRect();
-        coordinates.centerX = (coordinates.x - deckCoordinates.x) + (coordinates.width * 0.5);
-        coordinates.centerY = (coordinates.y - deckCoordinates.y) + (coordinates.height * 0.5);
+        const playerCoordinates = document.getElementById('player').getBoundingClientRect();
+        coordinates.centerX = ( (coordinates.x - deckCoordinates.x) - (playerCoordinates.width / 2) ) + (coordinates.width * 0.5);
+        coordinates.centerY = (( coordinates.y - deckCoordinates.y) - (playerCoordinates.height / 2)) + (coordinates.height * 0.5);
 
         return coordinates;
     };
