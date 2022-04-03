@@ -4,8 +4,6 @@ const LOGICAL_TEST_APP = (function () {
         vertical: 5
     };
 
-    const playerElement = document.getElementById('player');
-
     let moves = [];
 
     let currentPlayerPosition = '1:1';
@@ -21,17 +19,22 @@ const LOGICAL_TEST_APP = (function () {
             currentPlayerPosition = x + ':' + position[1];
         }
 
-        const nextPositionCoordinates = convertPositionToCoordinatesInDeck(currentPlayerPosition);
+       if (document.body.contains(document.querySelector(('[data-id="' + currentPlayerPosition + '"]')))){
+           const nextPositionCoordinates = convertPositionToCoordinatesInDeck(currentPlayerPosition);
+           const playerElement = document.getElementById('player');
 
-        playerElement.style.top = nextPositionCoordinates.centerY + 'px';
-        playerElement.style.left = nextPositionCoordinates.centerX + 'px';
+           playerElement.style.top = nextPositionCoordinates.centerY + 'px';
+           playerElement.style.left = nextPositionCoordinates.centerX + 'px';
+       }
     };
 
     const convertPositionToCoordinatesInDeck = (position) => {
         const coordinates = document.querySelector("[data-id='" + position +"']").getBoundingClientRect();
         const deckCoordinates = document.getElementById('deck').getBoundingClientRect();
-        coordinates.centerX = (coordinates.x - deckCoordinates.x) + (coordinates.width * 0.5);
-        coordinates.centerY = (coordinates.y - deckCoordinates.y) + (coordinates.height * 0.5);
+        const playerCoordinates = document.getElementById('player').getBoundingClientRect();
+
+        coordinates.centerX = ( (coordinates.x - deckCoordinates.x) - (playerCoordinates.width / 2) ) + (coordinates.width * 0.5);
+        coordinates.centerY = (( coordinates.y - deckCoordinates.y) - (playerCoordinates.height / 2)) + (coordinates.height * 0.5);
 
         return coordinates;
     };
