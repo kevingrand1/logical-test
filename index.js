@@ -19,11 +19,13 @@ const LOGICAL_TEST_APP = (function () {
             currentPlayerPosition = x + ':' + position[1];
         }
 
-        const nextPositionCoordinates = convertPositionToCoordinatesInDeck(currentPlayerPosition);
-        const playerElement = document.getElementById('player');
+       if (document.body.contains(document.querySelector(('[data-id="' + currentPlayerPosition + '"]')))){
+           const nextPositionCoordinates = convertPositionToCoordinatesInDeck(currentPlayerPosition);
+           const playerElement = document.getElementById('player');
 
-        playerElement.style.top = nextPositionCoordinates.centerY + 'px';
-        playerElement.style.left = nextPositionCoordinates.centerX + 'px';
+           playerElement.style.top = nextPositionCoordinates.centerY + 'px';
+           playerElement.style.left = nextPositionCoordinates.centerX + 'px';
+       }
     };
 
     const convertPositionToCoordinatesInDeck = (position) => {
