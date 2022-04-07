@@ -28,8 +28,6 @@
 #player {
     position: absolute;
     background: yellow;
-    width: 20px;
-    height: 20px;
     border-radius: 50%;
     display: inline-block;
     transition: all 500ms ease;
